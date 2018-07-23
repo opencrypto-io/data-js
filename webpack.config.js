@@ -10,6 +10,7 @@ module.exports = {
   module: {
     rules: [
       {
+        test: path.resolve(__dirname, 'dist/opencrypto-data.lib.js'),
         use: 'exports-loader?OpencryptoData'
       }
     ]
