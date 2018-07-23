@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack index.js --output dist/opencrypto-data.js -d --watch",
-    "compile": "webpack index.js --output dist/opencrypto-data.js",
+    "start": "webpack -d --watch",
+    "compile": "webpack",
     "lint": "standard",
     "lint-fix": "standard --fix",
     "test": "mocha && standard"
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "exports-loader": "^0.7.0",
     "mocha": "^5.2.0",
     "standard": "^11.0.1",
     "uglifyjs-webpack-plugin": "^1.2.7",
