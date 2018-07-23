@@ -59,4 +59,5 @@ class OpencryptoData {
   }
 }
 
+exports['OpencryptoData'] = OpencryptoData
 module.exports = OpencryptoData
