@@ -10,8 +10,8 @@
     "lint-fix": "standard --fix",
     "test": "mocha && standard"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Opencrypto <contact@opencrypto.io>",
+  "license": "MIT",
   "devDependencies": {
     "mocha": "^5.2.0",
     "pre-commit": "^1.2.2",
