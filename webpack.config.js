@@ -3,8 +3,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   entry: {
-    'opencrypto-data.lib': './index.js',
-    'opencrypto-data.lib.min': './index.js'
+    'ocd.lib': './index.js',
+    'ocd.lib.min': './index.js'
   },
   output: {
     filename: '[name].js',
