@@ -1,7 +1,7 @@
 const request = require('axios')
 const jmespath = require('jmespath')
 
-class OpencryptoData {
+class OpencryptoDataClient {
   constructor (options = {}) {
     this.defaults = {
       dataUrl: 'https://opencrypto-io.github.io/data/dist/data.json',
@@ -38,14 +38,18 @@ class OpencryptoData {
     }
     return this.data
   }
-  async get (collection, id, query = '@') {
-    return this.query(`${collection}[?id=='${id}'] | [0] | ${query}`)
+  async reload () {
+    this.data = null
+    return this.load()
+  }
+  async raw () {
+    return this.load()
   }
   async query (q) {
     return jmespath.search(await this.load(), q)
   }
-  async raw () {
-    return this.load()
+  async get (collection, id, query = '@') {
+    return this.query(`${collection}[?id=='${id}'] | [0] | ${query}`)
   }
   isLoaded () {
     return this.data !== null
@@ -59,4 +63,20 @@ class OpencryptoData {
   }
 }
 
-module.exports = OpencryptoData
+var globalClient = null
+
+function glob (fn, args) {
+  if (globalClient === null) {
+    globalClient = new OpencryptoDataClient()
+  }
+  return globalClient[fn].apply(globalClient, Array.from(args))
+}
+
+const ocd = {
+  Client: OpencryptoDataClient,
+  raw: function () { return glob('raw', arguments) },
+  query: function () { return glob('query', arguments) },
+  get: function () { return glob('get', arguments) }
+}
+
+module.exports = ocd

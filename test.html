@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>opencrypto-data-js</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    </head>
+    <body>
+      <div class="hero section">
+        <h1 class="title">opencrypto-data-js web test</h1>
+      </div>
+      <div class="section">
+        <div id="results">Loading ..</div>
+      </div>
+      <script src="https://unpkg.com/mithril/mithril.js"></script>
+      <script src="dist/opencrypto-data.lib.js"></script>
+      <script>
+        async function main () {
+          var root = document.getElementById("results")
+
+          var asset = await ocd.get("assets", "bitcoin")
+          var logo = asset.images.logo_square
+          var src = "data:image/svg+xml;base64,"+logo.data
+
+          m.render(root, m("div", [
+            m("div", asset.name),
+            m("div", m("img", { src, width: 300, height: 300 }))
+          ]))
+        }
+        main()
+      </script>
+    </body>
+</html>

@@ -2,18 +2,20 @@ const path = require('path')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-  entry: './index.js',
+  entry: {
+    'opencrypto-data.lib': './index.js',
+    'opencrypto-data.lib.min': './index.js'
+  },
   output: {
-    filename: 'opencrypto-data.lib.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
-    library: 'OpencryptoData',
+    library: 'ocd',
     libraryTarget: 'var'
   },
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        test: /\.js($|\?)/i
-      })
-    ]
+    minimize: true,
+    minimizer: [new UglifyJsPlugin({
+      include: /\.min\.js$/
+    })]
   }
 }
