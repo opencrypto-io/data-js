@@ -5,7 +5,9 @@ module.exports = {
   entry: './index.js',
   output: {
     filename: 'opencrypto-data.lib.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    library: 'OpencryptoData',
+    libraryTarget: 'var'
   },
   optimization: {
     minimizer: [
