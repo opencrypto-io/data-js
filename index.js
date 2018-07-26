@@ -12,6 +12,13 @@ class OpencryptoDataClient {
       },
       preload: false
     }
+    this.collections = {
+      project: { col: 'projects' },
+      asset: { col: 'assets', path: [ 'project' ] },
+      network: { col: 'networks', path: [ 'project', 'asset' ] },
+      exchange: { col: 'exchanges', path: [ 'project' ] },
+      market: { col: 'markets', path: [ 'project', 'exchange' ] }
+    }
     this.config = Object.assign(this.defaults, options)
     this.data = null
     this.loading = false
@@ -48,8 +55,23 @@ class OpencryptoDataClient {
   async query (q) {
     return jmespath.search(await this.load(), q)
   }
-  async get (collection, id, query = '@') {
-    return this.query(`${collection}[?id=='${id}'] | [0] | ${query}`)
+  async get (model, id, query = '@') {
+    let cc = this.collections[model]
+    if (!cc) {
+      throw new Error('Collection model not exists: ' + model)
+    }
+    let key = ''
+    let ids = id.split(':')
+    if (cc.path) {
+      for (let i = 0; i <= cc.path.length; i++) {
+        let rk = this.collections[cc.path[i]]
+        if (!rk) { rk = { col: cc.col } }
+        key += `${rk.col}[?id=='${ids[i]}'] | [0] | `
+      }
+    } else {
+      key = `${cc.col}[?id=='${id}'] | [0] | `
+    }
+    return this.query(`${key} ${query}`)
   }
   isLoaded () {
     return this.data !== null

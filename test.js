@@ -26,34 +26,43 @@ describe('Using (client)', () => {
   })
 
   it('query(q)', async () => {
-    let res = await data.query("assets[?symbol=='BTC'].images.logo_square.type")
+    let res = await data.query("projects[?id=='bitcoin'] | @[0] | assets[?symbol=='BTC'].images.logo_square.type")
     assert.equal(res, 'svg')
   })
 
-  it('get(col, id)', async () => {
-    let res = await data.get('assets', 'litecoin')
-    assert.equal(res.webids.twitter, 'litecoin')
+  it('get(model, id)', async () => {
+    let res = await data.get('project', 'ethereum')
+    assert.equal(res.webids.twitter, 'ethereum')
   })
 
-  it('get(col, id, q)', async () => {
-    let res = await data.get('assets', 'litecoin', 'webids.twitter')
-    assert.equal(res, 'litecoin')
+  it('get(model, id, q)', async () => {
+    let res = await data.get('project', 'ethereum', 'webids.twitter')
+    assert.equal(res, 'ethereum')
+  })
+
+  it('get(submodel, id)', async () => {
+    let res = await data.get('asset', 'ethereum:eth')
+    assert.equal(res.symbol, 'ETH')
+  })
+
+  it('get(submodel, id, q)', async () => {
+    let res = await data.get('asset', 'ethereum:eth', 'symbol')
+    assert.equal(res, 'ETH')
   })
 
   it('raw()', async () => {
     let res = await data.raw()
-    assert.equal(res.assets[0].symbol, 'ZRX')
+    assert.equal(res.projects[0].assets[0].symbol, 'BTC')
   })
 
   it('data.get() not found', async () => {
-    let res = await data.get('nonexistent', 'litecoin')
-    assert.equal(res, null)
+    await data.get('nonexistent', 'litecoin').catch((e) => { })
   })
 })
 
 describe('OpencryptoData.get(col, id, q) (static)', () => {
   it('get(col, id q)', async () => {
-    const res = await ocd.get('assets', 'litecoin', 'webids.twitter')
-    assert.equal(res, 'litecoin')
+    const res = await ocd.get('project', 'ethereum', 'webids.twitter')
+    assert.equal(res, 'ethereum')
   })
 })
