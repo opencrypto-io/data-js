@@ -4,7 +4,7 @@ const jmespath = require('jmespath')
 class OpencryptoDataClient {
   constructor (options = {}) {
     this.defaults = {
-      dataUrl: 'https://opencrypto-io.github.io/data/dist/data.json',
+      dataUrl: 'https://opencrypto-io.github.io/data/data.json',
       handlers: {
         loaded () {
           return this.data

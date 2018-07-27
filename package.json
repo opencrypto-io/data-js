@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack -d --watch",
     "compile": "webpack",
+    "compile-gitadd": "git add dist",
     "lint": "standard",
     "lint-fix": "standard --fix",
     "test": "mocha && standard"
@@ -26,7 +27,8 @@
   },
   "pre-commit": [
     "test",
-    "compile"
+    "compile",
+    "compile-gitadd"
   ],
   "standard": {
     "ignore": [
