@@ -1,7 +1,7 @@
 {
   "name": "opencrypto-data-js",
   "version": "0.1.0",
-  "description": "",
+  "description": "Universal Javascript client library for Opencrypto Data",
   "main": "index.js",
   "scripts": {
     "start": "webpack -d --watch",
@@ -10,7 +10,7 @@
     "lint-fix": "standard --fix",
     "test": "mocha && standard"
   },
-  "author": "Opencrypto <contact@opencrypto.io>",
+  "author": "Opencrypto.io <contact@opencrypto.io>",
   "license": "MIT",
   "devDependencies": {
     "mocha": "^5.2.0",
@@ -24,6 +24,10 @@
     "axios": "^0.18.0",
     "jmespath": "^0.15.0"
   },
+  "pre-commit": [
+    "test",
+    "compile"
+  ],
   "standard": {
     "ignore": [
       "dist"

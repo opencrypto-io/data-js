@@ -1,5 +1,13 @@
 language: node_js
 script: npm test
 node_js:
-  - "10"
-  - "8"
+- '10'
+- '8'
+deploy:
+  provider: npm
+  email: jan.stransky@arnal.cz
+  api_key:
+    secure: opX8xoBPwoA7OVcC2kQA/cVwZ3Q45QfgUFBryKeraYppxKGI0YV2dunBxdo2ij71/vE15vjyvV9iGNeu0b88Z3EdOufQBb7igU978keUHBRlY3Fq6qE4/gIwOTDd6DV0Xdv9lhDFf5nQb7pdue71atubxyfwgcjYJhR7YUG6xSgrtU0FhfhKZi5Go4ltgZ31iQBrVNTKetnBqw4by8rhQF3HQNVKFt1n0m8Oeja+tU7U82u8tvT7xa1uSqC1H7vdgfOiZvonkM35C3DGVPARkfUw9JlxwFS536RwsDQaJ4vcVt6dqNcu0uJjymUHCikPF9HXGsyG3OtbC+xg0lBGq8k0cHThwiZ1CeSpZHpjzo/hM9Q8aGdMXIGVzPaX1cSMk0sicRKP1DeMEaSIIJxNHbg0/B47RtoVm5Y2wdsP1jpu2yzaVR0D60ViQ46BTz63uRTDsI2XUgNrefRcyJ/6LZCF40EfjE0G8mEUTFPI2ZK1C9rUBoO8foSWTgwshZDQGAFNx6nw2dxIxnkoFzlpI7sY1LN+T4Tb3dn3ohG6phMw3kYz83+XujsNW26M2Z116C5HYKEUWmPGIii7QExj0JwHHQwoKCTU40q2qYaO+LLMSk+LSmJ8dHo//2Rvdi5DScQcszXYW31t51o4yJMPey9JcrPEYm9inyrhyoqRRls=
+  on:
+    tags: true
+    repo: opencrypto-io/data-js
