@@ -78,8 +78,8 @@ class OpencryptoDataClient {
   isInitialized () {
     return this.initialized
   }
-  async on (eventName, handler) {
-    return await new Promise((resolve, reject) => {
+  on (eventName, handler = (data) => {}) {
+    return new Promise((resolve, reject) => {
       this.config.handlers[eventName].push((data) => {
         resolve(handler(data))
       })
