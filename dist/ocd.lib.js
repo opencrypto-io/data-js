@@ -1,4 +1,4 @@
-// [ocd.lib.js]  Build version: 0.1.4 - Saturday, July 28th, 2018, 7:28:59 PM  
+// [ocd.lib.js]  Build version: 0.1.4 - Saturday, July 28th, 2018, 8:05:31 PM  
  var ocd =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -853,7 +853,7 @@ class OpencryptoDataClient {
   isInitialized () {
     return this.initialized
   }
-  on (eventName, handler = (d) => d) {
+  async on (eventName, handler = (d) => d) {
     return new Promise((resolve, reject) => {
       this.config.handlers[eventName].push((data) => {
         resolve(handler(data))
@@ -872,22 +872,17 @@ class OpencryptoDataClient {
   }
 }
 
-var globalClient = null
-
-function glob (fn, args) {
-  if (globalClient === null) {
-    globalClient = new OpencryptoDataClient()
-  }
-  return globalClient[fn].apply(globalClient, Array.from(args))
-}
-
 const ocd = {
   Client: OpencryptoDataClient,
-  raw: function () { return glob('raw', arguments) },
-  query: function () { return glob('query', arguments) },
-  get: function () { return glob('get', arguments) },
-  version: function () { return glob('version', arguments) }
+  globalClient: new OpencryptoDataClient()
 }
+
+const props = Object.getOwnPropertyNames(Object.getPrototypeOf(ocd.globalClient))
+props.forEach(m => {
+  ocd[m] = function () {
+    return ocd.globalClient[m].apply(ocd.globalClient, Array.from(arguments))
+  }
+})
 
 module.exports = ocd
 

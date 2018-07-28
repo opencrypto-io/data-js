@@ -79,7 +79,7 @@ class OpencryptoDataClient {
   isInitialized () {
     return this.initialized
   }
-  on (eventName, handler = (d) => d) {
+  async on (eventName, handler = (d) => d) {
     return new Promise((resolve, reject) => {
       this.config.handlers[eventName].push((data) => {
         resolve(handler(data))
@@ -98,21 +98,16 @@ class OpencryptoDataClient {
   }
 }
 
-var globalClient = null
-
-function glob (fn, args) {
-  if (globalClient === null) {
-    globalClient = new OpencryptoDataClient()
-  }
-  return globalClient[fn].apply(globalClient, Array.from(args))
-}
-
 const ocd = {
   Client: OpencryptoDataClient,
-  raw: function () { return glob('raw', arguments) },
-  query: function () { return glob('query', arguments) },
-  get: function () { return glob('get', arguments) },
-  version: function () { return glob('version', arguments) }
+  globalClient: new OpencryptoDataClient()
 }
+
+const props = Object.getOwnPropertyNames(Object.getPrototypeOf(ocd.globalClient))
+props.forEach(m => {
+  ocd[m] = function () {
+    return ocd.globalClient[m].apply(ocd.globalClient, Array.from(arguments))
+  }
+})
 
 module.exports = ocd
