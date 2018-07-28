@@ -14,12 +14,12 @@
         <div id="results">Loading ..</div>
       </div>
       <script src="https://unpkg.com/mithril/mithril.js"></script>
-      <script src="dist/ocd.lib.js"></script>
+      <script src="../dist/ocd.lib.js"></script>
       <script>
         async function main () {
           var root = document.getElementById("results")
-
           var asset = await ocd.get("asset", "makerdao:mkr")
+
           console.log(asset)
           var logo = asset.images.logo_square
           var src = "data:image/svg+xml;base64,"+logo.data

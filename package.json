@@ -3,6 +3,9 @@
   "version": "0.1.2",
   "description": "Universal Javascript client library for Opencrypto Data",
   "main": "index.js",
+  "bin": {
+    "ocd": "./bin/ocd.js"
+  },
   "scripts": {
     "start": "webpack -d --watch",
     "compile": "webpack",
