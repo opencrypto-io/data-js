@@ -28,6 +28,13 @@ class OpencryptoDataClient {
     this.initialized = true
   }
   async load () {
+    if (!this.isLoaded() && this.loading) {
+      return new Promise((resolve, reject) => {
+        this.on('loaded', () => {
+          resolve(this.data)
+        })
+      })
+    }
     if (!this.isLoaded()) {
       let res
       this.loading = true
