@@ -1,4 +1,4 @@
-// [ocd.lib.js]  Build version: 0.1.3 - Saturday, July 28th, 2018, 6:05:44 PM  
+// [ocd.lib.js]  Build version: 0.1.4 - Saturday, July 28th, 2018, 7:28:59 PM  
  var ocd =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -3647,7 +3647,7 @@ module.exports = function spread(callback) {
 /* 29 */
 /***/ (function(module) {
 
-module.exports = {"name":"opencrypto-data-js","version":"0.1.3","description":"Universal Javascript client library for Opencrypto Data","main":"index.js","bin":{"ocd":"./bin/ocd.js"},"scripts":{"start":"webpack -d --watch","compile":"webpack","compile-gitadd":"git add dist","lint":"standard","lint-fix":"standard --fix","test":"mocha && standard"},"author":"Opencrypto.io <contact@opencrypto.io>","license":"MIT","devDependencies":{"mocha":"^5.2.0","pre-commit":"^1.2.2","standard":"^11.0.1","uglifyjs-webpack-plugin":"^1.2.7","webpack":"^4.16.1","webpack-auto-inject-version":"^1.1.0","webpack-cli":"^3.1.0"},"dependencies":{"axios":"^0.18.0","jmespath":"^0.15.0"},"pre-commit":["test","compile","compile-gitadd"],"standard":{"ignore":["dist"]}};
+module.exports = {"name":"opencrypto-data-js","version":"0.1.4","description":"Universal Javascript client library for Opencrypto Data","main":"index.js","bin":{"ocd":"./bin/ocd.js"},"scripts":{"start":"webpack -d --watch","compile":"webpack","compile-gitadd":"git add dist","lint":"standard","lint-fix":"standard --fix","test":"mocha && standard"},"author":"Opencrypto.io <contact@opencrypto.io>","license":"MIT","devDependencies":{"mocha":"^5.2.0","pre-commit":"^1.2.2","standard":"^11.0.1","uglifyjs-webpack-plugin":"^1.2.7","webpack":"^4.16.1","webpack-auto-inject-version":"^1.1.0","webpack-cli":"^3.1.0"},"dependencies":{"axios":"^0.18.0","jmespath":"^0.15.0"},"pre-commit":["test","compile","compile-gitadd"],"standard":{"ignore":["dist"]}};
 
 /***/ })
 /******/ ]); 
