@@ -1,6 +1,6 @@
 {
   "name": "opencrypto-data-js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Universal Javascript client library for Opencrypto Data",
   "main": "index.js",
   "bin": {
