@@ -25,6 +25,12 @@ describe('Using (client)', () => {
     data = await new ocd.Client()
   })
 
+  it('version()', async () => {
+    let pattern = /^\d+\.\d+\.\d+$/
+    let version = await data.version()
+    assert.ok(version.match(pattern), 'version [' + version + '] not match pattern: ' + pattern)
+  })
+
   it('query(q)', async () => {
     let res = await data.query("projects[?id=='bitcoin'] | @[0] | assets[?symbol=='BTC'].images.logo_square.type")
     assert.equal(res, 'svg')
@@ -55,14 +61,13 @@ describe('Using (client)', () => {
     assert.equal(res.projects[0].assets[0].symbol, 'BTC')
   })
 
-  it('data.get() not found', async () => {
+  it('get() item not found', async () => {
     await data.get('nonexistent', 'litecoin').catch((e) => { })
   })
 })
 
 describe('OpencryptoData.get(col, id, q) (static)', () => {
   it('get(col, id q)', async () => {
-    const res = await ocd.get('project', 'ethereum', 'webids.twitter')
-    assert.equal(res, 'ethereum')
+    assert.equal(await ocd.get('project', 'ethereum', 'webids.twitter'), 'ethereum')
   })
 })

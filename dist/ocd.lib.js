@@ -1,4 +1,5 @@
-var ocd =
+// [ocd.lib.js]  Build version: 0.1.3 - Saturday, July 28th, 2018, 6:05:44 PM  
+ var ocd =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -773,6 +774,7 @@ module.exports = Cancel;
 
 const request = __webpack_require__(8)
 const jmespath = __webpack_require__(28)
+const pkg = __webpack_require__(29)
 
 class OpencryptoDataClient {
   constructor (options = {}) {
@@ -865,6 +867,9 @@ class OpencryptoDataClient {
       })
     }
   }
+  version () {
+    return pkg.version
+  }
 }
 
 var globalClient = null
@@ -880,7 +885,8 @@ const ocd = {
   Client: OpencryptoDataClient,
   raw: function () { return glob('raw', arguments) },
   query: function () { return glob('query', arguments) },
-  get: function () { return glob('get', arguments) }
+  get: function () { return glob('get', arguments) },
+  version: function () { return glob('version', arguments) }
 }
 
 module.exports = ocd
@@ -3637,5 +3643,11 @@ module.exports = function spread(callback) {
 })( false ? undefined : exports);
 
 
+/***/ }),
+/* 29 */
+/***/ (function(module) {
+
+module.exports = {"name":"opencrypto-data-js","version":"0.1.3","description":"Universal Javascript client library for Opencrypto Data","main":"index.js","bin":{"ocd":"./bin/ocd.js"},"scripts":{"start":"webpack -d --watch","compile":"webpack","compile-gitadd":"git add dist","lint":"standard","lint-fix":"standard --fix","test":"mocha && standard"},"author":"Opencrypto.io <contact@opencrypto.io>","license":"MIT","devDependencies":{"mocha":"^5.2.0","pre-commit":"^1.2.2","standard":"^11.0.1","uglifyjs-webpack-plugin":"^1.2.7","webpack":"^4.16.1","webpack-auto-inject-version":"^1.1.0","webpack-cli":"^3.1.0"},"dependencies":{"axios":"^0.18.0","jmespath":"^0.15.0"},"pre-commit":["test","compile","compile-gitadd"],"standard":{"ignore":["dist"]}};
+
 /***/ })
-/******/ ]);
+/******/ ]); 

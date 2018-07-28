@@ -3,27 +3,24 @@
 const path = require('path')
 const ocd = require(path.join(__dirname, '..'))
 
+function err (m) {
+  console.error(m)
+  process.exit(1)
+}
+
 async function cli (argv) {
   const cmd = argv[2] || null
   const args = argv.slice(3)
-  // console.log('CMD: %s', cmd)
-  // console.log('ARGS: %s', args)
+  const client = new ocd.Client()
 
-  switch (cmd) {
-    case 'get':
-    case 'query':
-      let res = await ocd[cmd].apply(null, args)
-      console.log(JSON.stringify(res, null, 2))
-      break
-
-    case null:
-      console.error('Please specify command')
-      break
-
-    default:
-      console.error('Unknown command: %s', cmd)
-      break
+  if (cmd === null) {
+    return err('Please specify command')
   }
+  if (!client[cmd]) {
+    return err('Unknown command: ' + cmd)
+  }
+  let res = await client[cmd].apply(client, args)
+  console.log(JSON.stringify(res, null, 2))
 }
 
 cli(process.argv)

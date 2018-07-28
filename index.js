@@ -1,5 +1,6 @@
 const request = require('axios')
 const jmespath = require('jmespath')
+const pkg = require('./package.json')
 
 class OpencryptoDataClient {
   constructor (options = {}) {
@@ -92,6 +93,9 @@ class OpencryptoDataClient {
       })
     }
   }
+  version () {
+    return pkg.version
+  }
 }
 
 var globalClient = null
@@ -107,7 +111,8 @@ const ocd = {
   Client: OpencryptoDataClient,
   raw: function () { return glob('raw', arguments) },
   query: function () { return glob('query', arguments) },
-  get: function () { return glob('get', arguments) }
+  get: function () { return glob('get', arguments) },
+  version: function () { return glob('version', arguments) }
 }
 
 module.exports = ocd

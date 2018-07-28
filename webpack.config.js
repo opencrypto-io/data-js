@@ -1,5 +1,6 @@
 const path = require('path')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const WebpackAutoInject = require('webpack-auto-inject-version')
 
 module.exports = {
   entry: {
@@ -17,5 +18,14 @@ module.exports = {
     minimizer: [new UglifyJsPlugin({
       include: /\.min\.js$/
     })]
-  }
+  },
+  plugins: [
+    new WebpackAutoInject({
+      SHORT: 'ocd.lib.js',
+      SILENT: true,
+      components: {
+        AutoIncreaseVersion: false
+      }
+    })
+  ]
 }
