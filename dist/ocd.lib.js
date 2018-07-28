@@ -779,9 +779,7 @@ class OpencryptoDataClient {
     this.defaults = {
       dataUrl: 'https://data.opencrypto.io/data.json',
       handlers: {
-        loaded () {
-          return this.data
-        }
+        loaded: []
       },
       preload: false
     }
@@ -795,18 +793,14 @@ class OpencryptoDataClient {
     this.config = Object.assign(this.defaults, options)
     this.data = null
     this.loading = false
-    if (this.config.preload && this.loading === false) {
+    if (this.config.preload && !this.isLoaded() && this.loading === false) {
       this.load()
     }
     this.initialized = true
   }
   async load () {
     if (!this.isLoaded() && this.loading) {
-      return new Promise((resolve, reject) => {
-        this.on('loaded', () => {
-          resolve(this.data)
-        })
-      })
+      return this.on('loaded')
     }
     if (!this.isLoaded()) {
       let res
@@ -819,9 +813,7 @@ class OpencryptoDataClient {
       }
       this.loading = false
       this.data = res.data
-      if (this.config.handlers.loaded) {
-        this.config.handlers.loaded()
-      }
+      this.emit('loaded', this.data)
     }
     return this.data
   }
@@ -859,9 +851,19 @@ class OpencryptoDataClient {
   isInitialized () {
     return this.initialized
   }
-  on (event, handler) {
-    this.config.handlers[event] = handler
-    return true
+  on (eventName, handler) {
+    return new Promise((resolve, reject) => {
+      this.config.handlers[eventName].push((data) => {
+        resolve(handler(data))
+      })
+    })
+  }
+  emit (eventName, data) {
+    if (this.config.handlers[eventName].length > 0) {
+      this.config.handlers[eventName].forEach(em => {
+        em(data)
+      })
+    }
   }
 }
 
