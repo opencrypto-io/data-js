@@ -58,7 +58,7 @@ describe('Using (client)', () => {
 
   it('raw()', async () => {
     let res = await data.raw()
-    assert.equal(res.projects[0].assets[0].symbol, 'BTC')
+    assert.equal(res.projects[0].assets[0].symbol, '42')
   })
 
   it('get() item not found', async () => {
