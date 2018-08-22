@@ -13,8 +13,8 @@ class OpencryptoDataClient {
     }
     this.collections = {
       project: { col: 'projects' },
-      blockchain: { col: 'blockchains', path: [ 'project' ] },
-      network: { col: 'networks', path: [ 'project', 'blockchain' ] },
+      ledger: { col: 'ledgers', path: [ 'project' ] },
+      network: { col: 'networks', path: [ 'project', 'ledger' ] },
       asset: { col: 'assets', path: [ 'project' ] },
       client: { col: 'clients', path: [ 'project' ] },
       exchange: { col: 'exchanges', path: [ 'project' ] },

@@ -1,4 +1,4 @@
-// [ocd.lib.js]  Build version: 0.1.5 - Wednesday, August 22nd, 2018, 9:52:26 AM  
+// [ocd.lib.js]  Build version: 0.1.5 - Wednesday, August 22nd, 2018, 11:25:10 AM  
  var ocd =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -787,8 +787,8 @@ class OpencryptoDataClient {
     }
     this.collections = {
       project: { col: 'projects' },
-      blockchain: { col: 'blockchains', path: [ 'project' ] },
-      network: { col: 'networks', path: [ 'project', 'blockchain' ] },
+      ledger: { col: 'ledgers', path: [ 'project' ] },
+      network: { col: 'networks', path: [ 'project', 'ledger' ] },
       asset: { col: 'assets', path: [ 'project' ] },
       client: { col: 'clients', path: [ 'project' ] },
       exchange: { col: 'exchanges', path: [ 'project' ] },
