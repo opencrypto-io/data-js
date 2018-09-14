@@ -4,7 +4,7 @@ node_js:
 - '8'
 script:
 - npm test
-- codecov
+- npm run-script coverage-report
 deploy:
   provider: npm
   email: jan.stransky@arnal.cz
