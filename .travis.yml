@@ -1,8 +1,10 @@
 language: node_js
-script: npm test
 node_js:
 - '10'
 - '8'
+script:
+- npm test
+- codecov
 deploy:
   provider: npm
   email: jan.stransky@arnal.cz

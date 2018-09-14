@@ -12,12 +12,15 @@
     "compile-gitadd": "git add dist",
     "lint": "standard",
     "lint-fix": "standard --fix",
-    "test": "mocha && standard"
+    "test": "standard && nyc _mocha",
+    "coverage-report": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "author": "Opencrypto.io <contact@opencrypto.io>",
   "license": "MIT",
   "devDependencies": {
+    "codecov": "^3.1.0",
     "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
     "pre-commit": "^1.2.2",
     "standard": "^11.0.1",
     "uglifyjs-webpack-plugin": "^1.2.7",
